@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de compra</title>
+</head>
+<body style="margin:0; padding:0; background-color:#eef3f8; font-family:Arial, Helvetica, sans-serif; color:#1f2937;">
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; background-color:#eef3f8; margin:0; padding:0;">
+        <tr>
+            <td align="center" style="padding:32px 14px;">
+
+                <table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:640px; max-width:640px; background-color:#ffffff; border-radius:18px; overflow:hidden; border:1px solid #dbe4ee;">
+
+                    <tr>
+                        <td style="background:linear-gradient(90deg, #0b84c6, #125ea7); height:8px; line-height:8px; font-size:0;">
+                            &nbsp;
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="padding:28px 30px 12px 30px; background-color:#ffffff;">
+                            <img src="data:image/png;base64,{{ logo_base64 }}"
+                                 alt="Inacorp"
+                                 width="220"
+                                 style="display:block; width:220px; max-width:220px; height:auto; border:0; margin:0 auto;">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="padding:0 36px 10px 36px;">
+                            <p style="margin:0; font-size:29px; line-height:34px; font-weight:bold; color:#0f172a;">
+                                Confirmación del pedido
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="padding:0 42px 24px 42px;">
+                            <p style="margin:0; font-size:15px; line-height:24px; color:#64748b;">
+                                Hemos registrado correctamente su compra. A continuación encontrará un resumen ejecutivo del pedido realizado.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:0 28px 22px 28px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                   style="width:100%; background-color:#f8fbff; border:1px solid #d9e7f3; border-radius:14px;">
+                                <tr>
+                                    <td style="padding:22px 24px;">
+                                        <p style="margin:0 0 18px 0; font-size:17px; line-height:22px; font-weight:bold; color:#0b84c6;">
+                                            Información del cliente
+                                        </p>
+
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+                                            <tr>
+                                                <td style="padding:0 0 14px 0; font-size:14px; font-weight:bold; color:#0f172a; width:42%;">Nombre del cliente</td>
+                                                <td style="padding:0 0 14px 0; font-size:14px; color:#334155;">{{ cliente_nombre }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 14px 0; font-size:14px; font-weight:bold; color:#0f172a;">Número de pedido</td>
+                                                <td style="padding:0 0 14px 0; font-size:14px; color:#334155;">{{ numero_orden }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 14px 0; font-size:14px; font-weight:bold; color:#0f172a;">Fecha de registro</td>
+                                                <td style="padding:0 0 14px 0; font-size:14px; color:#334155;">{{ fecha_creacion }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 14px 0; font-size:14px; font-weight:bold; color:#0f172a;">Teléfono</td>
+                                                <td style="padding:0 0 14px 0; font-size:14px; color:#334155;">{{ telefono }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0; font-size:14px; font-weight:bold; color:#0f172a;">Correo electrónico</td>
+                                                <td style="padding:0; font-size:14px; color:#334155;">{{ email }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:0 28px 14px 28px;">
+                            <p style="margin:0; font-size:18px; line-height:24px; font-weight:bold; color:#0f172a;">
+                                Detalle de productos
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:0 28px 22px 28px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                   style="width:100%; border-collapse:collapse; border:1px solid #dbe4ee; border-radius:14px; overflow:hidden;">
+                                <tr style="background-color:#0b84c6;">
+                                    <th align="left" style="padding:14px 12px; font-size:13px; color:#ffffff; font-weight:bold;">Producto</th>
+                                    <th align="center" style="padding:14px 12px; font-size:13px; color:#ffffff; font-weight:bold;">Cantidad</th>
+                                    <th align="right" style="padding:14px 12px; font-size:13px; color:#ffffff; font-weight:bold;">Puntos</th>
+                                    <th align="right" style="padding:14px 12px; font-size:13px; color:#ffffff; font-weight:bold;">Subtotal</th>
+                                </tr>
+
+                                {% for item in productos %}
+                                <tr style="background-color:#ffffff;">
+                                    <td style="padding:14px 12px; font-size:14px; color:#334155; border-top:1px solid #e5edf5;">
+                                        {{ item.PRODUCTO }}
+                                    </td>
+                                    <td align="center" style="padding:14px 12px; font-size:14px; color:#334155; border-top:1px solid #e5edf5;">
+                                        {{ item.CANTIDAD }}
+                                    </td>
+                                    <td align="right" style="padding:14px 12px; font-size:14px; color:#334155; border-top:1px solid #e5edf5;">
+                                        {{ item.PRECIO_PUNTOS }} Pts.
+                                    </td>
+                                    <td align="right" style="padding:14px 12px; font-size:14px; color:#0f172a; border-top:1px solid #e5edf5; font-weight:bold;">
+                                        {{ item.SUBTOTAL_PUNTOS }} Pts.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding:0 28px 24px 28px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                   style="width:100%; background:linear-gradient(180deg, #f8fbff, #f3f8fc); border:1px solid #d9e7f3; border-radius:14px;">
+                                <tr>
+                                    <td style="padding:22px 24px;">
+                                        <p style="margin:0 0 16px 0; font-size:17px; line-height:22px; font-weight:bold; color:#0b84c6;">
+                                            Resumen ejecutivo
+                                        </p>
+
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+                                            <tr>
+                                                <td style="padding:0 0 12px 0; font-size:14px; font-weight:bold; color:#0f172a;">Total del pedido</td>
+                                                <td align="right" style="padding:0 0 12px 0; font-size:16px; font-weight:bold; color:#0b84c6;">
+                                                    {{ total_puntos }} Pts.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0 0 12px 0; font-size:14px; font-weight:bold; color:#0f172a;">Cantidad de ítems</td>
+                                                <td align="right" style="padding:0 0 12px 0; font-size:14px; color:#334155;">
+                                                    {{ total_items }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding:14px 0 0 0; font-size:13px; line-height:21px; color:#475569; border-top:1px solid #dbe4ee;">
+                                                    Los premios serán entregados directamente en la oficina del canal correspondiente.<br>
+                                                    El tiempo estimado de entrega es de hasta 15 días laborables.
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="padding:0 36px 24px 36px;">
+                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                                   style="width:100%; background-color:#f8fbff; border:1px solid #d9e7f3; border-radius:12px;">
+                                <tr>
+                                    <td style="padding:18px 22px; text-align:center;">
+                                        <p style="margin:0; font-size:14px; line-height:24px; color:#334155;">
+                                            Este correo contiene el resumen de su pedido registrado en la plataforma.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="padding:0 32px 26px 32px;">
+                            <p style="margin:0; font-size:15px; line-height:24px; color:#334155;">
+                                Gracias por confiar en <b>Puntos Inacorp</b>.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="background-color:#0f172a; text-align:center; padding:20px 24px;">
+                            <p style="margin:0 0 6px 0; font-size:13px; line-height:20px; color:#ffffff; font-weight:bold;">
+                                Inacorp S.A.
+                            </p>
+                            <p style="margin:0; font-size:12px; line-height:20px; color:#cbd5e1;">
+                                Este es un correo automático. La bandeja de entrada no es monitoreada, por favor no responda a este mensaje.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

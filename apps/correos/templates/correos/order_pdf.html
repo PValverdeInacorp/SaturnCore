@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de compra</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 18px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #243447;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .wrapper {
+            width: 100%;
+        }
+
+        .header-box {
+            background-color: #f4f7fa;
+            border: 1px solid #d9e2ec;
+            border-bottom: 2px solid #0b84c6;
+            padding: 10px 16px;
+        }
+
+        .header-table {
+            width: 100%;
+        }
+
+        .header-left {
+            width: 20%;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .header-center {
+            width: 80%;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #0b84c6;
+            vertical-align: middle;
+        }
+
+        .logo {
+            width: 120px;
+        }
+
+        .subtitle {
+            margin-top: 8px;
+            font-size: 11px;
+            text-align: center;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+
+        .section {
+            margin-top: 10px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            border-left: 5px solid #0b84c6;
+            padding-left: 8px;
+            margin-bottom: 8px;
+        }
+
+        .table-rounded {
+            border: 1px solid #d9e2ec;
+            background: #ffffff;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .info-table,
+        .product-table,
+        .summary {
+            width: 100%;
+            margin: 0;
+        }
+
+        .info-table {
+            background-color: #f9fbfc;
+        }
+
+        .info-table td,
+        .product-table td,
+        .summary td {
+            padding: 8px;
+            font-size: 11px;
+            vertical-align: middle;
+            border-bottom: 1px solid #e6edf3;
+            border-right: 1px solid #e6edf3;
+        }
+
+        .info-label {
+            width: 30%;
+            font-weight: bold;
+            background-color: #f4f7fa;
+            font-size: 11px;
+        }
+
+        .product-table th {
+            background-color: #0b84c6;
+            color: #fff;
+            padding: 9px 8px;
+            font-size: 11px;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.35);
+        }
+
+        .product-table th.last-col,
+        .product-table td.last-col,
+        .info-table td.last-col,
+        .summary td.last-col {
+            border-right: none;
+        }
+
+        .summary td.no-bottom,
+        .info-table td.no-bottom,
+        .product-table td.no-bottom {
+            border-bottom: none;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .product-image {
+            width: 42px;
+        }
+
+        .summary {
+            background: #f4f7fa;
+        }
+
+        .summary-total {
+            font-size: 16px;
+            font-weight: bold;
+            color: #0b84c6;
+            text-align: right;
+            border-top: 2px solid #0b84c6;
+        }
+
+        .notes {
+            margin-top: 10px;
+            border: 1px solid #d9e2ec;
+            padding: 10px;
+            font-size: 11px;
+            line-height: 1.5;
+            background: #fcfdff;
+        }
+
+        .footer {
+            margin-top: 12px;
+            background: #0b84c6;
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="header-box">
+        <table class="header-table">
+            <tr>
+                <td class="header-left">
+                    {% if logo_base64 %}
+                        <img src="data:image/png;base64,{{ logo_base64 }}" class="logo">
+                    {% endif %}
+                </td>
+                <td class="header-center">
+                    Reporte de compra
+                </td>
+            </tr>
+        </table>
+
+        <div class="subtitle">
+            Estimado(a) {{ orden.NOMBRES }} {{ orden.APELLIDOS }}, su pedido ha sido registrado correctamente.<br>
+            A continuación, se presenta el detalle de su compra.
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Resumen de la compra</div>
+
+        <div class="table-rounded">
+            <table class="info-table">
+                <tr>
+                    <td class="info-label">N.º de pedido</td>
+                    <td class="last-col">{{ orden.NUMERO_DOCUMENTO }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">Fecha de registro</td>
+                    <td class="last-col">{{ orden.FECHA_CREACION }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">Cliente</td>
+                    <td class="last-col">{{ orden.NOMBRES }} {{ orden.APELLIDOS }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">Correo electrónico</td>
+                    <td class="last-col">{{ orden.EMAIL }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label">Teléfono</td>
+                    <td class="last-col">{{ orden.TELEFONO }}</td>
+                </tr>
+                <tr>
+                    <td class="info-label no-bottom">Documento</td>
+                    <td class="last-col no-bottom">{{ orden.DOCUMENTO }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Detalle de productos</div>
+
+        <div class="table-rounded">
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Cantidad</th>
+                        <th>Producto</th>
+                        <th class="last-col">Subtotal (Pts.)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in productos %}
+                    <tr>
+                        <td class="center">
+                            {% if item.IMAGEN_BASE64 %}
+                                <img src="data:image/png;base64,{{ item.IMAGEN_BASE64 }}" class="product-image">
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td class="center">{{ item.CANTIDAD }}</td>
+                        <td>{{ item.PRODUCTO }}</td>
+                        <td class="right last-col">{{ item.SUBTOTAL_PUNTOS }} Pts.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-rounded" style="margin-top: 8px;">
+            <table class="summary">
+                <tr>
+                    <td><b>Cantidad de ítems</b></td>
+                    <td class="right last-col">{{ total_items }}</td>
+                </tr>
+                <tr>
+                    <td class="no-bottom"><b>Total de la compra</b></td>
+                    <td class="summary-total last-col no-bottom">{{ orden.TOTAL_PUNTOS }} Pts.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="notes">
+        <b>Condiciones de entrega</b><br><br>
+        • Los premios serán entregados directamente en la oficina del canal correspondiente.<br>
+        • El tiempo estimado de entrega es de hasta 15 días laborables.
+    </div>
+
+    <div class="footer">
+        Inacorp S.A. Ecuador · Documento generado automáticamente · 2026
+    </div>
+
+</div>
+
+</body>
+</html>
