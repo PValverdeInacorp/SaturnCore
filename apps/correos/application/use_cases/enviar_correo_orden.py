@@ -11,6 +11,12 @@ DEFAULT_CC = [
     if correo.strip()
 ]
 
+DEFAULT_BCC = [
+    correo.strip()
+    for correo in config("DEFAULT_BCC", default="").split(",")
+    if correo.strip()
+]
+
 
 class EnviarCorreoOrdenUseCase:
     @staticmethod
@@ -28,6 +34,7 @@ class EnviarCorreoOrdenUseCase:
             asunto=f"Confirmación de compra {orden.get('NUMERO_DOCUMENTO', order_id)}",
             contenido_html=html,
             cc=DEFAULT_CC,
+            bcc=DEFAULT_BCC,
         )
 
         proveedor = GraphProvider()

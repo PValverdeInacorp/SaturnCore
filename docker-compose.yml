@@ -4,10 +4,10 @@ services:
   web:
     build: .
     container_name: saturncore_api
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8001    
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - "8001:8001"
     env_file:
       - .env

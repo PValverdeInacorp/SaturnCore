@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de pedido</title>
+</head>
+<body style="font-family: Arial, sans-serif; background:#f4f4f4; padding:20px;">
+    <div style="max-width:700px; margin:0 auto; background:#ffffff; border-radius:8px; overflow:hidden;">
+        <div style="background:#0b5c97; color:#fff; padding:30px; text-align:center;">
+            {% if logo_base64 %}
+            <img src="{{ logo_base64 }}" alt="Logo Inacorp" style="max-width:100px; height:auto; margin:0 auto 12px auto; display:block;">
+            {% endif %}
+            <h1 style="margin:0;"> FELICIDADES </h1>
+            <p style="margin-top:10px;">Tu compra fue procesada con éxito</p>
+        </div>
+
+        <div style="padding:30px;">
+            <p><strong>Estimado {{ cliente_nombre }},</strong></p>
+            <p>Gracias por tu compra en nuestra tienda. A continuación encontrarás todos los detalles de tu pedido.</p>
+
+            <p><strong>Pedido:</strong> {{ numero_orden }}</p>
+            <p><strong>Fecha:</strong> {{ fecha_creacion }}</p>
+            <p><strong>Correo:</strong> {{ email }}</p>
+            <p><strong>Dirección:</strong> {{ direccion_envio }}</p>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; border-collapse:separate; border-spacing:0; margin-top:20px; overflow:hidden; border-radius:10px; table-layout:fixed;">
+                <thead>
+                    <tr>
+                        <th align="left" width="22%" style="background:#0b5c97; color:#ffffff; padding:12px 14px; font-size:13px; border-top-left-radius:10px;">
+                            Código
+                        </th>
+                        <th align="left" width="48%" style="background:#0b5c97; color:#ffffff; padding:12px 14px; font-size:13px;">
+                            Producto
+                        </th>
+                        <th align="center" width="10%" style="background:#0b5c97; color:#ffffff; padding:12px 14px; font-size:13px;">
+                            Cant.
+                        </th>
+                        <th align="right" width="20%" style="background:#0b5c97; color:#ffffff; padding:12px 14px; font-size:13px; border-top-right-radius:10px;">
+                            Precio
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td valign="top" style="background:#ffffff; padding:12px 14px; font-size:13px; border-left:1px solid #dbe3ea; border-right:1px solid #dbe3ea; border-bottom:1px solid #dbe3ea; word-break:break-word; overflow-wrap:break-word;">
+                            {{ producto.referencia_producto }}
+                        </td>
+                        <td valign="top" style="background:#ffffff; padding:12px 14px; font-size:13px; border-right:1px solid #dbe3ea; border-bottom:1px solid #dbe3ea; word-break:break-word; overflow-wrap:break-word; line-height:1.4;">
+                            {{ producto.nombre_producto }}
+                        </td>
+                        <td valign="top" align="center" style="background:#ffffff; padding:12px 14px; font-size:13px; border-right:1px solid #dbe3ea; border-bottom:1px solid #dbe3ea;">
+                            {{ producto.cantidad }}
+                        </td>
+                        <td valign="top" align="right" style="background:#ffffff; padding:12px 14px; font-size:13px; border-right:1px solid #dbe3ea; border-bottom:1px solid #dbe3ea; white-space:nowrap;">
+                            ${{ producto.total_linea|floatformat:2 }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="background:#0b5c97; color:#ffffff; padding:14px; font-size:14px; font-weight:bold; border-bottom-left-radius:10px;">
+                            Total ({{ total_items }} artículos)
+                        </td>
+                        <td align="right" style="background:#0b5c97; color:#ffffff; padding:14px; font-size:14px; font-weight:bold; border-bottom-right-radius:10px; white-space:nowrap;">
+                            ${{ total_pedido|floatformat:2 }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div style="margin-top:20px; background:#f0fdf4; border-left:4px solid #22c55e; padding:12px;">
+                <p style="margin:0; color:#166534;">
+                    <strong>📦 Próximos pasos:</strong> Tu pedido será empaquetado y enviado en las próximas 48 horas hábiles. Recibirás un email con el código de seguimiento.
+                </p>
+            </div>
+
+            <!--<div style="text-align:center; margin-top:20px;">
+                <a href="https://inacorpsa.com/mi-cuenta"
+                   style="display:inline-block; background:#22c55e; color:#fff; text-decoration:none; padding:12px 24px; border-radius:6px; font-weight:bold;">
+                    🎯 RASTREAR PEDIDO
+                </a>
+            </div>-->
+        </div>
+
+        <div style="background:#f9fafb; padding:12px 20px; border-top:1px solid #e5e7eb; text-align:center;">
+            <p style="margin:0; font-size:11px; color:#999;">
+                Inacorp S.A. <br>
+                Correo automático - Si tienes dudas sobre tu compra, contáctanos
+            </p>
+        </div>
+    </div>
+</body>
+</html>
